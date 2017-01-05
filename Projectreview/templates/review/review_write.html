@@ -1,1 +1,21 @@
-review_write.html
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" id="review_write_form" action="{% url 'saveboard' %}">
+	<div class="form-group">
+		<label for="title">제목</label>
+		<input type="text" class="form-control" id="id_title" name="title">
+	</div>
+	<div class="form-group">
+		<label for="	content">내용</label>
+		<textarea class="form-control" id="id_content" name="content" rows="5"></textarea>
+	</div>
+	<div class="form-group">
+		<label for="reviewimg">제품사진</label>
+		<input type="file" id="id_reviewimg" name="reviewimg">
+		<p class="help-block">사진을 첨부하시려면 "파일선택"을 클릭하세요.</p>
+	</div>
+	<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+</form>
+
+{% endblock %}

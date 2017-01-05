@@ -48,7 +48,7 @@ def review_detail(request, review_id):
 
 def write_board(request):
 	context = {}
-	return render(request, 'writepage.html', context)
+	return render(request, 'review/review_write.html', context)
 
 def save_board(request):
 	reviewboard = Review (title = request.POST['title'],
