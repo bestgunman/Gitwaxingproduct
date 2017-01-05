@@ -2,17 +2,43 @@ from django.shortcuts import render, redirect
 from .models import Comment, Review
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+def make_page_range(current,total_page):
+	divn = 10
+	range_index=divmod(current-1,divn)[0]
+	page_range = range((range_index)*divn+1, (range_index+1)*divn+1)
+	page_previous = range_index*divn
+	page_next = (range_index+1)*divn+1
+	if((range_index+1)*divn>total_page):
+		page_range = range((range_index)*divn+1,total_page)
+		page_next = 0
+	if(range_index == 0):
+		page_previous = 0
+	return [page_range,page_previous,page_next]
+
 def review_board(request):
 	reviewlists = Review.objects.order_by('-regdate')
-	paginate = Paginator(reviewlists,5)
+	paginate = Paginator(reviewlists,10)
 	page = request.GET.get('page')
 	try:
 		reviewlist = paginate.page(page)
 	except PageNotAnInteger:
 		reviewlist = paginate.page(1)
+		page = 1
 	except EmptyPage:
 		reviewlist = paginate.page(paginate.num_pages)
-	context = {'reviewlist': reviewlist,}
+	page = int(page)
+#pagination for divn group
+	make_page_range_result = make_page_range(page,paginate.num_pages+1)
+	board_range = make_page_range_result[0]
+	page_previous = make_page_range_result[1]
+	page_next = make_page_range_result[2]
+	context = {
+		'reviewlist': reviewlist,
+		'page_previous':page_previous,
+		'page':page,
+		'page_next':page_next,
+		'board_range':board_range,
+		}
 	return render(request, 'review/review_list.html', context)
 
 def review_detail(request, review_id):

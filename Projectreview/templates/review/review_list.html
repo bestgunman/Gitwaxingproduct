@@ -2,36 +2,50 @@
 
 {% block content %}
 
-{% for review in reviewlist %}
-	<div class="row">
-		<div class="col-xs-4">
-			이미지위치
-		</div>
-		<div class="col-xs-8">
-			<h4>{{ review.product }}</h4>
-			<h5>{{ review.author }}, {{ review.regdate }}</h5>
-			<p>{{ review.content }}</p>
-		</div>
-	</div>
-{% endfor %}
+    {% for review in reviewlist %}
+        <div class="row">
+            <div class="col-xs-4">
+                <a href="{% url 'review_detail' review.id %}">
+                    {% if review.reviewimg %}
+                        <img class="img-responsive" src="{{ review.reviewimg.url }}"/>
+                    {% else %}
+                        {% if review.product.productimg %}
+                            <img class="img-responsive" src="{{ review.product.productimg.url }}"/>
+                        {% else %}
+                            <p class="text-center">이미지 준비중</p>
+                        {% endif %}
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-xs-8">
+                <a href="{% url 'review_detail' review.id %}">
+                    <h4>{{ review.product }}</h4>
+                    <h5>{{ review.author }}, {{ review.regdate|date:"Y-m-d" }}</h5>
+                    <p>{{ review.content }}</p>
+                </a>
+            </div>
+        </div>
+        <hr/>
+    {% endfor %}
 
-
-
-<div class="pagination">
-    <span class="step-links">
-        {% if reviewlist.has_previous %}
-            <a href="?page={{ reviewlist.previous_page_number }}">previous</a>
+<nav class="text-center">
+  <ul class="pagination pagination-sm">
+    {% if not page_previous == 0 %}
+    <li><a href="?page={{ page_previous }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+    {% endif %}
+    {% for range_num in board_range %}
+        {% if range_num == page %}
+            <li class="active"><a href="?page={{ range_num }}">{{ range_num }}</a></li>
+        {% else %}
+            <li><a href="?page={{ range_num }}">{{ range_num }}</a></li>
         {% endif %}
-
-        <span class="current">
-            Page {{ reviewlist.number }} of {{ reviewlist.paginator.num_pages }}.
-        </span>
-
-        {% if reviewlist.has_next %}
-            <a href="?page={{ reviewlist.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+    {% endfor %}
+    {% if not page_next == 0 %}
+    <li><a href="?page={{ page_next }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+    {% endif %}
+  </ul>
+</nav>
+<p class="text-right"><a href="#" class="btn btn-lg btn-primary">글쓰기</a></p>
 
 
 {% endblock %}

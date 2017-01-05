@@ -16,11 +16,11 @@ def login_view(request):
 			context = {'check': '아이디나 패스워드가 틀렸습니다'}
 	else:
 		context = {'check': '아이디와 패스워드를 입력하세요'}
-	return render(request, 'loginpage.html', context)
+	return render(request, 'account/login.html', context)
 	
 def logout_view(request):
 	logout(request)
-	return redirect('/account/loginview/')
+	return redirect('login')
 
 def signup_view(request):
 	if request.method=="POST":
@@ -30,13 +30,13 @@ def signup_view(request):
 		user_pw2 = request.POST['password2']
 		if User.objects.filter(username=user_id).exists():
 			context = {'error':'이미 존재하는 아이디 입니다'}
-			return render(request, 'signuppage.html', context)
+			return render(request, 'account/signup.html', context)
 		if User.objects.filter(email=usere_mail).exists():
 			context = {'error':'이미 존재하는 이메일 입니다'}
-			return render(request, 'signuppage.html', context)
+			return render(request, 'account/signup.html', context)
 		if user_pw1 != user_pw2:
 			context = {'error':'패스워드가 다릅니다'}
-			return render(request, 'signuppage.html',context)
+			return render(request, 'account/signup.html',context)
 
 		user = User.objects.create_user(user_id, usere_mail, user_pw1)
 		user.save()
@@ -44,5 +44,5 @@ def signup_view(request):
 		login(request, user)
 		return redirect('/review')
 	else:
-		return render(request, 'signuppage.html')
+		return render(request, 'account/signup.html')
 	

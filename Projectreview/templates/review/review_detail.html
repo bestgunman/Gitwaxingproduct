@@ -2,9 +2,11 @@
 
 {% block content %}
 <div class="row">
-	<div class="col-xs-4">유저사진</div>
+	<div class="col-xs-4">
+		{{ review.author.photo }}
+	</div>
 	<div class="col-xs-8">
-		<h5>닉네임</h5>
+		<h5>{{ review.author }}</h5>
 		<p>안녕하세요 누구누구입니다.</p>
 		<p>작성한 리뷰 총 3개</p>
 	</div>

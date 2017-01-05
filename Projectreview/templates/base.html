@@ -37,8 +37,17 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">로그인/로그아웃</a></li>
-	        <li><a href="#">회원가입/마이페이지</a></li>
+	      	  {% if request.user.is_superuser %}
+		        <li><a href="/admin">관리자</a></li>
+	      	  {% endif %}
+	      	  {% if request.user.is_authenticated %}
+		        <li><a href="{% url 'logout' %}">로그아웃</a></li>
+		        <li><a href="#">마이페이지</a></li>
+	      	  {% else %}
+		        <li><a href="{% url 'login' %}">로그인</a></li>
+		        <li><a href="{% url 'signup' %}">회원가입</a></li>
+	      	  {% endif %}
+
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -49,8 +58,6 @@
 			<div class="col-xs-12">
 
 				{% block content %}{% endblock %}
-
-
 
 			</div>
 		</div>

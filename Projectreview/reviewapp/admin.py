@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Comment, Review
 
 class ReviewAdmin(admin.ModelAdmin):
-	list_display = ['content','author','regdate','score','product','reviewimg',]
+	list_display = ['id','content','author','regdate','score','product','reviewimg',]
 
 class CommentAdmin(admin.ModelAdmin):
 	list_display = ['guest','comment','regdate','review',]
