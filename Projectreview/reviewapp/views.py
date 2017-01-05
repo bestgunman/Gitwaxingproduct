@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Comment, Review
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-# Create your views here.
 def review_board(request):
 	reviewlists = Review.objects.order_by('-regdate')
 	paginate = Paginator(reviewlists,5)
@@ -14,13 +13,16 @@ def review_board(request):
 	except EmptyPage:
 		reviewlist = paginate.page(paginate.num_pages)
 	context = {'reviewlist': reviewlist,}
-	return render(request, 'reviewpage.html', context)
+	return render(request, 'review/review_list.html', context)
 
+def review_detail(request, review_id):
+	review = Review.objects.get(id=review_id)
+	context = {'review':review,}
+	return render(request, 'review/review_detail.html',context)
 
 def write_board(request):
 	context = {}
 	return render(request, 'writepage.html', context)
-
 
 def save_board(request):
 	reviewboard = Review (title = request.POST['title'],
