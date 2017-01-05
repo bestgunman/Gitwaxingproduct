@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from productapp.models import Product
-import os
+import os, datetime
 
 def get_image_path(instance, filename):
-	return os.path.join('review_image', str(instance.pk), filename)
+	return os.path.join('review_image', filename)
 
 class Review(models.Model):
 	title = models.CharField(max_length = 1024)
