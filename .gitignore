@@ -88,7 +88,8 @@ ENV/
 # Rope project settings
 .ropeproject
 
+.DS_Store
 .sqlite3
 
 uploaded_files/
-.DS_Store
+
