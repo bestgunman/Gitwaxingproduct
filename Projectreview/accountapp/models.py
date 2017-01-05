@@ -3,7 +3,7 @@ from django.conf import settings
 import os
 
 def get_profileimg_path(instance, filename):
-	return os.path.join('profile_image', str(instance.pk), filename)
+	return os.path.join('profile_image', str(instance.accuser.pk), filename)
 
 class Profile(models.Model):
 	accuser = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,)

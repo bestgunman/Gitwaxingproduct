@@ -2,10 +2,10 @@ from django.db import models
 import os
 
 def get_brandimage_path(instance, filename):
-	return os.path.join('brand_image', str(instance.pk), filename)
+	return os.path.join('brand_image', filename)
 
 def get_productimage_path(instance, filename):
-	return os.path.join('product_image', str(instance.pk), filename)
+	return os.path.join('product_image', filename)
 
 class Brand(models.Model):
 	name = models.CharField(max_length = 128)
