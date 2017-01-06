@@ -16,6 +16,7 @@ class Brand(models.Model):
 		return self.name
 
 class Product(models.Model):
+	url = models.CharField(max_length=1024)
 	title = models.CharField(max_length = 1024)
 	brand = models.ForeignKey(Brand, on_delete = models.CASCADE)
 	price = models.IntegerField()

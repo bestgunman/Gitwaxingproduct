@@ -7,10 +7,8 @@ def brand_detail(request):
 	context = {}
 	return render(request, 'product/brand.html', context)
 
-def product_detail(request):
-	context = {}
+def product_detail(request, url):
+	product = Product.objects.get(url=url)
+	context = {'product':product,}
 	return render(request, 'product/product.html', context)
-
-
-
 

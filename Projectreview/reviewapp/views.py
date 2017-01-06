@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Comment, Review
+from productapp.models import Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 def make_page_range(current,total_page):
 	divn = 10
@@ -46,19 +48,41 @@ def review_detail(request, review_id):
 	context = {'review':review,}
 	return render(request, 'review/review_detail.html',context)
 
-def write_board(request):
-	context = {}
-	return render(request, 'review/review_write.html', context)
+def write_board(request, url):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	if request.method=="POST":
+		title = request.POST['title']
+		content = request.POST['content']
+		author = request.user
+		score = request.POST['score']
+		product = Product.objects.get(url=url)
+		reviewboard = Review (title = title,
+								content = content,
+								author = author,
+								score = score,
+								product = product,
+			)
+#이미지 넣는경우
+		print(request.FILES)
+		if len(request.FILES) != 0:
+			reviewboard.reviewimg = request.FILES['reviewimg']
+		reviewboard.save()
+		return redirect('/review')
+	else:
+		context = {}
+		return render(request, 'review/review_write.html', context)
 
-def save_board(request):
-	reviewboard = Review (title = request.POST['title'],
-							content = request.POST['content'],
-							author = request.POST['author'],
-							score = request.POST['score'],
-							product = request.POST['product'],
-		)
-	reviewboard.save()
-	return redirect('/review')
+
+
+	title = models.CharField(max_length = 1024)
+	content = models.TextField()
+	author = models.ForeignKey(User, on_delete = models.CASCADE)
+	regdate = models.DateTimeField(auto_now_add = True)
+	score = models.IntegerField()
+	product = models.ForeignKey(Product, on_delete = models.CASCADE)
+	reviewimg = models.ImageField(blank=True, upload_to=get_image_path)
+
 
 def save_comment(request):
 	context = {}
