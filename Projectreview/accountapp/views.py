@@ -12,7 +12,7 @@ def login_view(request):
 		user = authenticate(username = user_id, password = user_pw)
 		if user is not None:
 			login(request, user)
-			return redirect('review_board')
+			return redirect('review_index')
 		else:
 			context = {'error': '아이디나 패스워드를 다시 확인하여주세요.'}
 	return render(request, 'account/login.html', context)
@@ -45,7 +45,7 @@ def signup_view(request):
 		profile.save()
 		user = authenticate(username = user_id, password = user_pw1)
 		login(request, user)
-		return redirect('review_board')
+		return redirect('review_index')
 	else:
 		return render(request, 'account/signup.html')
 
@@ -62,10 +62,9 @@ def mypage_view(request):
 			profile.profileimg = request.FILES['profileimg']
 		profile.save()
 		return redirect('mypage')
-	else:	
-		user = request.user
-		context={'user':user,}
-		return render(request, 'account/mypage.html')
+	else:
+		context={'user':request.user,}
+		return render(request, 'account/mypage.html', context)
 
 
 def userpage_view(request, username):
