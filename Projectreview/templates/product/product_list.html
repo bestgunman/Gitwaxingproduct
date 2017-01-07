@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for product in product_list %}
+        <div class="row">
+            <div class="col-xs-4">
+                <a href="{% url 'productdetail' product.url %}">
+                    {% if product.productimg %}
+                        <img class="img-responsive" src="{{ product.productimg.url }}"/>
+                    {% else %}
+                        <p class="text-center">이미지 준비중</p>
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-xs-8">
+                <a href="{% url 'productdetail' product.url %}">
+                    <h4>{{ product.brand }}</h4>
+                    <h4>{{ product.title }}</h4>
+                    <p>{{ product.price }}원</p>
+                </a>
+            </div>
+        </div>
+        <hr/>
+    {% endfor %}
+
+<nav class="text-center">
+  <ul class="pagination pagination-sm">
+    {% if not page_previous == 0 %}
+    <li><a href="?page={{ page_previous }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+    {% endif %}
+    {% for range_num in board_range %}
+        {% if range_num == page %}
+            <li class="active"><a href="?page={{ range_num }}">{{ range_num }}</a></li>
+        {% else %}
+            <li><a href="?page={{ range_num }}">{{ range_num }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if not page_next == 0 %}
+    <li><a href="?page={{ page_next }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+    {% endif %}
+  </ul>
+</nav>
+<p class="text-right"><a href="writeboard" class="btn btn-lg btn-primary">글쓰기</a></p>
+
+
+{% endblock %}
+

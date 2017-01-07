@@ -4,7 +4,11 @@
 
 <div class="row">
 	<div class="col-xs-6">
+		{% if product.productimg %}
 		<img class="img-responsive" src="{{product.productimg.url}}" />
+		{% else %}
+		<p class="text-center">이미지 준비중</p>
+		{% endif %}
 	</div>
 	<div class="col-xs-6">
 		<h5>{{ product.brand }}</h5>

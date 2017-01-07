@@ -64,7 +64,6 @@ def write_board(request, url):
 								product = product,
 			)
 #이미지 넣는경우
-		print(request.FILES)
 		if len(request.FILES) != 0:
 			reviewboard.reviewimg = request.FILES['reviewimg']
 		reviewboard.save()
@@ -72,17 +71,6 @@ def write_board(request, url):
 	else:
 		context = {}
 		return render(request, 'review/review_write.html', context)
-
-
-
-	title = models.CharField(max_length = 1024)
-	content = models.TextField()
-	author = models.ForeignKey(User, on_delete = models.CASCADE)
-	regdate = models.DateTimeField(auto_now_add = True)
-	score = models.IntegerField()
-	product = models.ForeignKey(Product, on_delete = models.CASCADE)
-	reviewimg = models.ImageField(blank=True, upload_to=get_image_path)
-
 
 def save_comment(request):
 	context = {}
