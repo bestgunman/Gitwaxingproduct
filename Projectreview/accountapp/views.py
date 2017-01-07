@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Profile
+from reviewapp.models import Review
 
-# Create your views here.
 def login_view(request):
 	context = {}
 	if request.method=="POST":
@@ -37,9 +38,39 @@ def signup_view(request):
 			return render(request, 'account/signup.html',context)
 		user = User.objects.create_user(user_id, user_email, user_pw1)
 		user.save()
+		profile = Profile(accuser = user,
+			nickname = user.username,
+			bio = '초기상태입니다. 변경해주세요.'
+			)
+		profile.save()
 		user = authenticate(username = user_id, password = user_pw1)
 		login(request, user)
 		return redirect('review_board')
 	else:
 		return render(request, 'account/signup.html')
-	
+
+def mypage_view(request):
+	if not request.user.is_authenticated():
+		return redirect('login')
+	if request.method=="POST":
+		profile = Profile.objects.get(accuser=request.user)
+		profile.nickname = request.POST['nickname']
+		profile.bio = request.POST['bio']
+#이미지 넣는경우
+		print(request.FILES)
+		if len(request.FILES) != 0:
+			profile.profileimg = request.FILES['profileimg']
+		profile.save()
+		return redirect('mypage')
+	else:	
+		user = request.user
+		context={'user':user,}
+		return render(request, 'account/mypage.html')
+
+
+def userpage_view(request, username):
+	user = User.objects.get(username=username)
+	context = {'user':user,}
+	return render(request, 'account/userpage.html', context)
+
+

@@ -72,6 +72,8 @@ def write_board(request, url):
 		context = {}
 		return render(request, 'review/review_write.html', context)
 
+
+
 def save_comment(request):
 	context = {}
 	commentcontent = Comment (guest = request.POST['guest'],

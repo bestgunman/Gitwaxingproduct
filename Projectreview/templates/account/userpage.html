@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+		<h2 class="text-center">유저 프로필</h2>
+		{% if user.profile.profileimg %}
+			<img class="img-responsive" src="{{ user.profile.profileimg.url }}"/>
+		{% endif %}
+		<h3>닉네임 : {{user.profile.nickname}}</h3>
+		<h3>인사말 : {{user.profile.bio}}</h3>
+	</div>
+</div>
+{% endblock %}
