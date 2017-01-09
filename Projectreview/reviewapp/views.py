@@ -45,7 +45,12 @@ def review_board(request):
 
 def review_detail(request, review_id):
 	review = Review.objects.get(id=review_id)
-	context = {'review':review,}
+	author_written_reviews = Review.objects.filter(author = review.author)
+	author_written_reviews_count = author_written_reviews.count()
+	context = {
+		'review':review,
+		'author_written_reviews_count':author_written_reviews_count,
+		}
 	return render(request, 'review/review_detail.html',context)
 
 def write_board(request, url):

@@ -8,6 +8,8 @@ def get_productimage_path(instance, filename):
 	return os.path.join('product_image', filename)
 
 class Brand(models.Model):
+	url = models.CharField(max_length=1024, blank=True)
+	urladdress = models.URLField(blank=True)
 	name = models.CharField(max_length = 128)
 	content = models.TextField()
 	logo = models.ImageField(blank=True, upload_to=get_brandimage_path)

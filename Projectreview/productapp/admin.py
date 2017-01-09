@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Brand, Product
 
 class BrandAdmin(admin.ModelAdmin):
-	list_display = ['name','content','logo',]
+	list_display = ['name','url','urladdress','content','logo',]
 
 class ProductAdmin(admin.ModelAdmin):
 	list_display = ['url','title','brand','price','urladdress','content','productimg',]
