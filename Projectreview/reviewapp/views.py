@@ -53,6 +53,8 @@ def review_detail(request, review_id):
 		}
 	return render(request, 'review/review_detail.html',context)
 
+
+
 def write_board(request, url):
 	if not request.user.is_authenticated():
 		return redirect('login')
@@ -72,10 +74,11 @@ def write_board(request, url):
 		if len(request.FILES) != 0:
 			reviewboard.reviewimg = request.FILES['reviewimg']
 		reviewboard.save()
-		return redirect('/review')
+		return redirect('/')
 	else:
 		context = {}
 		return render(request, 'review/review_write.html', context)
+
 
 
 
@@ -88,5 +91,5 @@ def save_comment(request):
 	commentcontent.save()
 	return redirect()
 
-def goto_write(request):
-	return redirect('/review/writeboard')
+def goto_main(request):
+	return redirect('/')

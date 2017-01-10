@@ -68,10 +68,12 @@ def product_detail(request, url):
 	product = Product.objects.get(url=url)
 	review_list = Review.objects.filter(product=product)
 	total = 0
-	for review in review_list:
-		total += review.score
-	score_avg = round(total/review_list.count(),1)
-	product = Product.objects.get(url=url)
+	if not review_list.exists():
+		score_avg = "아직 평가가 없습니다"
+	else:
+		for review in review_list:
+			total += review.score
+		score_avg = round(total/review_list.count(),1)
 	context = {'product':product,
 				'score_avg':score_avg,
 	}
