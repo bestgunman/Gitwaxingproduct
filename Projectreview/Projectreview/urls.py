@@ -17,10 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from reviewapp.views import review_board
+#from reviewapp.views import review_board
+from productapp.views import product_list
 
 urlpatterns = [
-    url(r'^$', review_board, name='review_index'),
+    url(r'^$', product_list, name='review_index'),
+#    url(r'^$', review_board, name='review_index'),
     url(r'^admin/', admin.site.urls),
     url(r'^review/', include('reviewapp.urls')),
     url(r'^product/', include('productapp.urls')),

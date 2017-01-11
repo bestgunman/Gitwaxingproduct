@@ -5,6 +5,7 @@ from reviewapp.models import Review
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+
 def brand_list(request):
 	brand_list = Brand.objects.order_by('name')
 	paginate = Paginator(brand_list,10)
@@ -37,7 +38,7 @@ def brand_detail(request, url):
 
 
 
-
+#인덱스 페이지
 def product_list(request):
 	product_list = Product.objects.order_by('title')
 	paginate = Paginator(product_list,10)

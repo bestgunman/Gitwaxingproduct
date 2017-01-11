@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from reviewapp.views import review_list
 
 urlpatterns = [
 	url(r'^productlist/$', views.product_list, name='product_list'),

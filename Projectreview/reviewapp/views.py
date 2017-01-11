@@ -17,8 +17,9 @@ def make_page_range(current,total_page):
 		page_previous = 0
 	return [page_range,page_previous,page_next]
 
-def review_board(request):
-	reviewlists = Review.objects.order_by('-regdate')
+def review_list(request, product_url):
+	target_product = Product.objects.get(url=product_url)
+	reviewlists = Review.objects.filter(product=target_product)
 	paginate = Paginator(reviewlists,10)
 	page = request.GET.get('page')
 	try:
@@ -35,6 +36,7 @@ def review_board(request):
 	page_previous = make_page_range_result[1]
 	page_next = make_page_range_result[2]
 	context = {
+		'product_url':product_url,
 		'reviewlist': reviewlist,
 		'page_previous':page_previous,
 		'page':page,
