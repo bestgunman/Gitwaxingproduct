@@ -25,32 +25,6 @@
     {% endfor %}
 
 
-<!--        {% for review in reviewlist %}
-        <div class="row">
-            <div class="col-xs-4">
-                <a href="{% url 'review_detail' review.id %}">
-                    {% if review.reviewimg %}
-                        <img class="img-responsive" src="{{ review.reviewimg.url }}"/>
-                    {% else %}
-                        {% if review.product.productimg %}
-                            <img class="img-responsive" src="{{ review.product.productimg.url }}"/>
-                        {% else %}
-                            <p class="text-center">이미지 준비중</p>
-                        {% endif %}
-                    {% endif %}
-                </a>
-            </div>
-            <div class="col-xs-8">
-                <a href="{% url 'review_detail' review.id %}">
-                    <h4>{{ review.product }}</h4>
-                    <h5>{{ review.author }}, {{ review.regdate|date:"Y-m-d" }}</h5>
-                    <p>{{ review.content }}</p>
-                </a>
-            </div>
-        </div>
-        <hr/>
-    {% endfor %}
--->
 
 <nav class="text-center">
   <ul class="pagination pagination-sm">
