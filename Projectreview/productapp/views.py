@@ -65,8 +65,8 @@ def product_list(request):
 		}
 	return render(request, 'product/product_list.html', context)
 
-def product_detail(request, url):
-	product = Product.objects.get(url=url)
+def product_detail(request, url1):
+	product = Product.objects.get(url=url1)
 	review_list = Review.objects.filter(product=product)
 	total = 0
 	if not review_list.exists():

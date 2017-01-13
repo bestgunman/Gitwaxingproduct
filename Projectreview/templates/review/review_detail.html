@@ -24,7 +24,11 @@
 <hr/>
 <div class="row">
 	<div class="col-xs-4">
-		<img class="img-responsive" src="{{ review.reviewimg.url }}" />
+		{% if review.reviewimg %}
+			<img class="img-responsive" src="{{ review.reviewimg.url }}" />
+		{% else %}
+			<p>리뷰 이미지가 없습니다.</p>
+		{% endif %}
 	</div>
 	<div class="col-xs-8">
 	<p>평점 : {{ review.score }}</p>
