@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 from .conf import *
 
 import os
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'reviewapp',
     'accountapp',
     'productapp',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +119,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+RAVEN_CONFIG = {
+    'dsn': RAVEN_DSN,
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+}
 
 
 # Static files (CSS, JavaScript, Images)
