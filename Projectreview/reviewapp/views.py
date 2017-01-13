@@ -78,7 +78,8 @@ def write_board(request, url):
 		reviewboard.save()
 		return redirect('/')
 	else:
-		context = {}
+		the_product = Product.objects.get(url=url)
+		context = {'the_product':the_product,}
 		return render(request, 'review/review_write.html', context)
 
 

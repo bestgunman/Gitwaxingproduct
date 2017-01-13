@@ -5,9 +5,7 @@
 {% csrf_token %}
 	<div class="form-group">
 		<label for="product">
-			{% for product in product_list %}
-				<h4>{{product.title}}</h4>
-			{% endfor %}
+		{{ the_product.title }}
 		</label>
 	</div>
 	<div class="form-group">
