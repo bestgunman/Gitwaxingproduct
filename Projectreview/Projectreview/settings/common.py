@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accountapp',
     'productapp',
     'raven.contrib.django.raven_compat',
+    'storages',
 ]
 
 MIDDLEWARE = [
