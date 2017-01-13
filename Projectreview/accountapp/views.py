@@ -39,8 +39,8 @@ def signup_view(request):
 		user = User.objects.create_user(user_id, user_email, user_pw1)
 		user.save()
 		profile = Profile(accuser = user,
-			nickname = user.username,
-			bio = '초기상태입니다. 변경해주세요.'
+						nickname = user.username,
+						bio = '초기상태입니다. 변경해주세요.'
 			)
 		profile.save()
 		user = authenticate(username = user_id, password = user_pw1)
