@@ -33,8 +33,32 @@ def brand_list(request):
 
 def brand_detail(request, url):
 	brand = Brand.objects.get(url=url)
-	context = {'brand':brand,}
+	product_list = Product.objects.filter(brand=brand)
+	review_lists = []
+	for product in product_list:
+		review_lists.append(Review.objects.filter(product=product))
+	total = 0
+	count = 0
+	for review_list in review_lists:
+		for review in review_list:
+			total+=review.score
+			count+=1
+	brand_avg = round(total/count,1)
+	context = {'brand':brand,
+				'brand_avg':brand_avg,
+	}
 	return render(request, 'product/brand.html', context)
+
+
+'''
+	total = 0
+	if not brand_list.exists():
+		brand_avg = "아직 평가가 없습니다"
+	else:
+		for avg in brand_list:
+			total += avg.prduct_detail.score_avg
+		score_avg = round(total/brand_list.count(),1)
+'''
 
 
 

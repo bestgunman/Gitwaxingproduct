@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-xs-6">
-		{% if name.logo %}
+		{% if brand.logo %}
 		<img class="img-responsive" src="{{brand.logo.url}}" />
 		{% else %}
 		<p class="text-center">이미지 준비중</p>
@@ -17,7 +17,7 @@
 </div>
 <div class="row">
 	<div class="col-xs-12">
-	누적평가 별표 몇 점
+	브랜드 누적 평점: {{ brand_avg }}점
 	</div>
 </div>
 <div class="row">
