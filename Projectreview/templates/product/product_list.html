@@ -45,6 +45,13 @@
 </nav>
 <p class="text-left"><a href="/" class="btn btn-lg btn-primary">처음으로</a></p>
 
+<div class="row">
+    <ul class="nav nav-pills" id="index_bottom_nav">
+      <li role="presentation"><a href="{% url 'index' %}">Reviews</a></li>
+      <li role="presentation" class="active"><a href="{% url 'product_list' %}">Products</a></li>
+      <li role="presentation"><a href="{% url 'brand_list' %}">Brands</a></li>
+    </ul>
+</div>
 
 {% endblock %}
 

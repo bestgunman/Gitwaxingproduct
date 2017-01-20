@@ -17,6 +17,11 @@ def make_page_range(current,total_page):
 		page_previous = 0
 	return [page_range,page_previous,page_next]
 
+def index(request):
+	reviewlist = Review.objects.all()
+	context = {'reviewlist':reviewlist,}
+	return render(request, 'review/index.html', context)
+
 def review_list(request, product_url):
 	target_product = Product.objects.get(url=product_url)
 	reviewlists = Review.objects.filter(product=target_product)

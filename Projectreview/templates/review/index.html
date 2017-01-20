@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for review in reviewlist %}
+        <div class="row">
+            <div class="col-xs-4">
+                <a href="{% url 'review_detail' review.id %}">
+                    {% if review.reviewimg %}
+                        <img class="img-responsive" src="{{ review.reviewimg.url }}"/>
+                    {% else %}
+                        {% if review.product.productimg %}
+                            <img class="img-responsive" src="{{ review.product.productimg.url }}"/>
+                        {% else %}
+                            <p class="text-center">이미지 준비중</p>
+                        {% endif %}
+                    {% endif %}
+                </a>
+            </div>
+            <div class="col-xs-8">
+                <a href="{% url 'review_detail' review.id %}">
+                    <h4>{{ review.product }}</h4>
+                    <h5>{{ review.author }}, {{ review.regdate|date:"Y-m-d" }}</h5>
+                    <p>{{ review.content }}</p>
+                </a>
+            </div>
+        </div>
+        <hr/>
+    {% endfor %}
+
+<nav class="text-center">
+  <ul class="pagination pagination-sm">
+    {% if not page_previous == 0 %}
+    <li><a href="?page={{ page_previous }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+    {% endif %}
+    {% for range_num in board_range %}
+        {% if range_num == page %}
+            <li class="active"><a href="?page={{ range_num }}">{{ range_num }}</a></li>
+        {% else %}
+            <li><a href="?page={{ range_num }}">{{ range_num }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if not page_next == 0 %}
+    <li><a href="?page={{ page_next }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+<p class="text-right"><a href="" class="btn btn-lg btn-primary">리뷰 쓰기</a></p>
+<div class="row">
+	<ul class="nav nav-pills" id="index_bottom_nav">
+	  <li role="presentation" class="active"><a href="{% url 'index' %}">Reviews</a></li>
+	  <li role="presentation"><a href="{% url 'product_list' %}">Products</a></li>
+	  <li role="presentation"><a href="{% url 'brand_list' %}">Brands</a></li>
+	</ul>
+</div>
+{% endblock %}
+

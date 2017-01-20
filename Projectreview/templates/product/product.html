@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="{% url 'branddetail' product.brand.url %}">{{ product.brand.name }}</a></li>
+  <li class="active">{{ product.title }}</li>
+</ol>
 
 <div class="row">
 	<div class="col-xs-6">

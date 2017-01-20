@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="{% url 'branddetail' review.product.brand.url %}">{{ review.product.brand.name }}</a></li>
+  <li><a href="{% url 'productdetail' review.product.url %}">{{review.product}}</a></li>
+</ol>
+
 <div class="row">
 	<div class="col-xs-4">
 		<img class="img-responsive" src="{{ review.author.profile.profileimg.url }}" />

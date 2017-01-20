@@ -41,6 +41,12 @@
   </ul>
 </nav>
 <p class="text-right"><a href="writeboard" class="btn btn-lg btn-primary">글쓰기</a></p>
-
+<div class="row">
+    <ul class="nav nav-pills" id="index_bottom_nav">
+      <li role="presentation"><a href="{% url 'index' %}">Reviews</a></li>
+      <li role="presentation"><a href="{% url 'product_list' %}">Products</a></li>
+      <li role="presentation" class="active"><a href="{% url 'brand_list' %}">Brands</a></li>
+    </ul>
+</div>
 
 {% endblock %}
